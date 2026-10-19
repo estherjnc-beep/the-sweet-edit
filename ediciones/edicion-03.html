@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Sweet Edit · Edición 02</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --pink:#F5C8DA;--lilac:#C7B4FA;--lime:#D8F55A;--peach:#FFC76A;--onp:#292431;
+  --bg:#FBF7F4;--surface:#FFFFFF;--ink:#292431;--soft:#5E5868;--line:#E9E1E6;--tint:#F5EFF2;
+  --local:#D99A00;--entorno:#2F9E62;--exterior:#7C5CE6;
+  --fact:#5E5868;--interp:#7C5CE6;--hyp:#C77D00;
+  --c1:var(--lilac);--c2:var(--lime);--c3:var(--pink);--c4:var(--lime);--c5:var(--peach);--c6:var(--pink);--c7:var(--lilac);--c8:var(--peach);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#1B1720;--surface:#292431;--ink:#F6F2F8;--soft:#B8B0C2;--line:#3B3445;--tint:#231E2A;
+  --local:#FFC76A;--entorno:#7FD9A6;--exterior:#C7B4FA;--fact:#B8B0C2;--interp:#C7B4FA;--hyp:#FFC76A;}}
+:root[data-theme="dark"]{
+  --bg:#1B1720;--surface:#292431;--ink:#F6F2F8;--soft:#B8B0C2;--line:#3B3445;--tint:#231E2A;
+  --local:#FFC76A;--entorno:#7FD9A6;--exterior:#C7B4FA;--fact:#B8B0C2;--interp:#C7B4FA;--hyp:#FFC76A;}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Figtree",system-ui,sans-serif;font-size:16.5px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque",system-ui,sans-serif;margin:0;letter-spacing:-.025em}
+a{color:inherit;text-underline-offset:3px}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--exterior);outline-offset:2px;border-radius:8px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+@keyframes pop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* header */
+.nav{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav .wrap{padding-top:10px;padding-bottom:8px}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px}
+.logo{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:19px;letter-spacing:-.03em;white-space:nowrap;background:none;border:0;padding:0}
+.logo span{background:var(--lime);color:var(--onp);padding:0 6px;border-radius:6px;margin-left:2px}
+.mode{display:flex;background:var(--tint);border:1px solid var(--line);border-radius:99px;padding:3px}
+.mode button{border:0;background:none;border-radius:99px;padding:5px 11px;font-size:12.5px;font-weight:800;color:var(--soft);white-space:nowrap}
+.mode button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;mask-image:linear-gradient(90deg,#000 90%,transparent)}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{flex:none;border:0;background:none;font-size:14px;font-weight:700;padding:7px 12px;border-radius:99px;color:var(--soft)}
+.tabs button[aria-selected="true"]{background:var(--ink);color:var(--bg)}
+
+.view{display:none;padding:22px 0 44px;animation:pop .3s ease}
+.view.on{display:block}
+.kick{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);margin-bottom:6px}
+.kick i{width:9px;height:9px;border-radius:50%;background:var(--k,var(--lime));display:inline-block}
+h2.sec{font-size:clamp(34px,8vw,58px);line-height:.95;font-weight:800;letter-spacing:-.045em}
+.dek{color:var(--soft);margin:10px 0 18px;max-width:44em;font-size:16px}
+.block{margin-top:34px}
+.block>h3{font-size:22px;margin-bottom:12px}
+
+/* masthead */
+.mast{border-radius:28px;padding:22px 20px 24px;background:
+ radial-gradient(120% 90% at 100% 0%,var(--lilac) 0%,transparent 55%),
+ radial-gradient(90% 80% at 0% 100%,var(--pink) 0%,transparent 60%),
+ var(--peach);color:var(--onp);position:relative;overflow:hidden}
+.mast .desc{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.mast h1{font-size:clamp(54px,15vw,124px);line-height:.84;font-weight:800;letter-spacing:-.06em;margin:10px 0 12px}
+.mast h1 b{color:var(--onp)}
+.mast .tag{font-family:"Bricolage Grotesque",sans-serif;font-size:clamp(19px,4.5vw,26px);font-weight:700;letter-spacing:-.02em}
+.mast .es{font-size:15px;margin-top:2px;opacity:.85}
+.mast .ed{display:flex;gap:6px;flex-wrap:wrap;margin-top:16px}
+.chipd{font-size:12.5px;font-weight:800;border-radius:99px;padding:4px 10px;background:rgba(255,255,255,.6);color:var(--onp)}
+.chipd.dk{background:var(--onp);color:var(--lime)}
+
+.now{display:grid;gap:10px;margin-top:14px}
+@media(min-width:760px){.now{grid-template-columns:repeat(3,1fr)}}
+.nc{border-radius:20px;padding:15px 16px;background:var(--surface);border:1px solid var(--line)}
+.nc .n{font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);display:flex;align-items:center;gap:6px}
+.nc .n i{width:9px;height:9px;border-radius:50%;background:var(--k)}
+.nc p{margin:6px 0 0;font-size:15.5px;line-height:1.45}
+
+/* story cards (THE EDIT) */
+.grid{display:grid;gap:14px;grid-template-columns:1fr}
+@media(min-width:620px){.grid{grid-template-columns:1fr 1fr}}
+@media(min-width:940px){.grid{grid-template-columns:repeat(3,1fr)}}
+.story{display:flex;flex-direction:column;text-align:left;border:1px solid var(--line);padding:0;border-radius:22px;overflow:hidden;background:var(--surface);transition:transform .15s,box-shadow .15s}
+.story:hover{transform:translateY(-3px);box-shadow:0 10px 24px -14px rgba(41,36,49,.45)}
+.art{position:relative;aspect-ratio:16/7;background:var(--cc);color:var(--onp);display:grid;place-items:center;overflow:hidden}
+.art::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 80% at 80% 20%,rgba(255,255,255,.55),transparent 60%)}
+.art .emo{font-size:58px;line-height:1;position:relative;filter:drop-shadow(0 6px 10px rgba(41,36,49,.18))}
+.art .sec-l{position:absolute;left:12px;top:12px;font-size:11.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;background:var(--onp);color:#fff;border-radius:99px;padding:3px 9px}
+.art .rel{position:absolute;right:12px;top:12px;background:#fff;color:var(--onp);border-radius:12px;padding:3px 8px;font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:15px;line-height:1.1;text-align:center}
+.art .rel small{display:block;font-family:"Figtree",sans-serif;font-size:9.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;opacity:.7}
+.art .cat{position:absolute;left:12px;bottom:10px;font-size:12px;font-weight:800;background:rgba(255,255,255,.75);border-radius:99px;padding:2px 9px}
+.bd{padding:14px 16px 16px;display:flex;flex-direction:column;gap:8px;flex:1}
+.bd h3{font-size:21px;line-height:1.12;font-weight:800}
+.bd .sum{margin:0;color:var(--soft);font-size:15px;line-height:1.45}
+.meta{font-size:13px;color:var(--soft);font-weight:600;display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center}
+.meta b{color:var(--ink);font-weight:800}
+.geo{display:inline-flex;align-items:center;gap:5px}
+.geo::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--g)}
+.tags{display:flex;flex-wrap:wrap;gap:5px}
+.tg{font-size:11.5px;font-weight:700;border-radius:99px;padding:2px 8px;background:var(--tint);border:1px solid var(--line);color:var(--soft)}
+.srcl{font-size:12.5px;color:var(--soft);margin-top:auto;padding-top:8px;border-top:1px dashed var(--line);display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.imgbtn{display:inline-flex;align-items:center;gap:4px;font-size:12.5px;font-weight:800;text-decoration:none;background:var(--ink);color:var(--bg);border-radius:99px;padding:5px 11px;white-space:nowrap}
+.imgbtn:hover{opacity:.85}
+.story{cursor:pointer}
+
+/* hero */
+.hero{display:grid;border-radius:26px}
+@media(min-width:760px){.hero{grid-template-columns:1.1fr 1fr}.hero .art{aspect-ratio:auto;min-height:100%}.hero .bd h3{font-size:30px}}
+.hero .art .emo{font-size:84px}
+
+/* INTEL rows */
+.rows{display:grid;gap:8px}
+.irow{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:16px;padding:12px 14px;width:100%}
+.irow:hover{background:var(--tint)}
+.sc{min-width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:var(--cc);color:var(--onp);font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:19px;line-height:1}
+.sc small{display:block;font-family:"Figtree";font-size:9px;font-weight:800;text-transform:uppercase}
+.irow h4{font-size:16.5px;line-height:1.2}
+.irow .op{font-size:13.5px;margin-top:5px;color:var(--ink);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.irow .op b{color:var(--interp)}
+.mini{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;text-align:left;border:0;border-top:1px solid var(--line);background:none;padding:11px 4px;width:100%}
+.mini:first-child{border-top:0}
+.mini:hover{background:var(--tint)}
+.mini .e{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;font-size:24px;background:var(--cc)}
+.mini b{display:block;font-size:15.5px;line-height:1.25;font-family:"Bricolage Grotesque",sans-serif}
+.mini small{font-size:12.5px;color:var(--soft);font-weight:600}
+.mini .s{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:17px}
+.pl{font-size:11.5px;font-weight:800;border-radius:99px;padding:1px 8px;background:var(--tint);border:1px solid var(--line)}
+
+/* filters */
+.chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px;margin-bottom:8px}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;border:1.5px solid var(--line);background:var(--surface);border-radius:99px;padding:6px 12px;font-size:13.5px;font-weight:700;color:var(--soft)}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.search{width:100%;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);border-radius:14px;padding:11px 14px;font:inherit;font-size:16px;margin-bottom:10px}
+.count{font-size:13px;color:var(--soft);font-weight:700;margin:2px 0 12px}
+
+/* pack watch */
+.strip{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(200px,62%);gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px;scrollbar-width:thin}
+@media(min-width:760px){.strip{grid-auto-columns:240px}}
+.pk{scroll-snap-align:start;background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden;text-decoration:none;display:flex;flex-direction:column}
+.pk .ph{text-decoration:none;color:inherit;aspect-ratio:4/3;display:grid;place-items:center;font-size:46px;background:var(--kc);position:relative}
+.pk .ph span.l{position:absolute;left:8px;top:8px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;background:var(--onp);color:#fff;border-radius:99px;padding:2px 8px}
+.pk .tx{padding:10px 12px 12px;font-size:13.5px;line-height:1.38}
+.pk .tx b{display:block;font-size:14.5px}
+.pk .tx small{color:var(--soft);font-size:12px;display:block;margin-top:4px}
+
+/* generic cards */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:16px}
+.stack{display:grid;gap:12px}
+@media(min-width:760px){.stack.two{grid-template-columns:1fr 1fr}}
+.ev{border-left:4px solid var(--e);padding:4px 0 4px 12px;margin:10px 0 0}
+.ev small{display:block;font-size:11px;font-weight:800;color:var(--e);letter-spacing:.07em;text-transform:uppercase}
+.ev p{margin:2px 0 0;font-size:15px}
+.sig{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start}
+.mat{width:58px;text-align:center;font-size:10.5px;font-weight:800;line-height:1.2}
+.mat .m{height:50px;border-radius:12px;background:var(--tint);border:1px solid var(--line);position:relative;overflow:hidden;margin-bottom:4px}
+.mat .m span{position:absolute;left:0;right:0;bottom:0;background:var(--mc)}
+.sig h3,.cd h3,.nx h3{font-size:19px;margin-bottom:4px}
+.sig p{margin:0;font-size:15px}
+.small{font-size:13px;color:var(--soft);font-weight:600}
+.cd .top{display:flex;gap:12px;align-items:center}
+.cd .em{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;font-size:28px;background:var(--k);flex:none}
+table.dd{width:100%;border-collapse:collapse;font-size:14px;margin-top:12px}
+table.dd th{text-align:left;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--soft);padding:6px 8px;border-bottom:2px solid var(--ink)}
+table.dd td{padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+table.dd td:first-child{font-weight:800}
+.tw{overflow-x:auto}
+.rel-l{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.rel-l button{border:1.5px solid var(--line);background:var(--tint);border-radius:99px;padding:4px 10px;font-size:13px;font-weight:700}
+.comp h3{font-size:18px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.mv{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;margin-top:10px;font-size:14.5px}
+.mv .w{font-size:12px;font-weight:800;color:var(--soft);padding-top:2px;white-space:nowrap}
+.mv small{display:block;color:var(--soft);font-size:12px}
+.note{background:color-mix(in srgb,var(--peach) 35%,var(--surface));border:1px dashed var(--hyp);border-radius:12px;padding:9px 12px;font-size:13.5px;margin-top:10px}
+.cal{list-style:none;margin:0;padding:0}
+.cal li{display:grid;grid-template-columns:100px 1fr;gap:10px;padding:10px 0;border-top:1px solid var(--line);font-size:15px}
+.cal li:first-child{border-top:0}
+.cal b{font-family:"Bricolage Grotesque",sans-serif}
+table.src{width:100%;border-collapse:collapse;font-size:14px}
+table.src td{border-top:1px solid var(--line);padding:9px 6px;vertical-align:top}
+table.src td:first-child{font-weight:800;width:36%}
+table.src small{color:var(--soft);display:block;font-weight:500}
+.btn{border:0;background:var(--ink);color:var(--bg);border-radius:99px;padding:10px 16px;font-weight:800;font-size:14.5px}
+.btn.ghost{background:var(--surface);color:var(--ink);border:1.5px solid var(--line)}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.wt{display:grid;grid-template-columns:1fr auto;gap:5px 10px;font-size:14.5px}
+.wt span:nth-child(even){font-weight:800;font-family:"Bricolage Grotesque",sans-serif}
+
+/* dialog */
+dialog{border:0;padding:0;width:min(760px,100%);max-width:100%;height:100dvh;max-height:100dvh;margin:0 auto;background:var(--bg);color:var(--ink)}
+@media(min-width:760px){dialog{height:auto;max-height:92dvh;border-radius:26px;margin:auto}}
+dialog::backdrop{background:rgba(27,23,32,.6)}
+.dx{position:sticky;top:0;z-index:5;display:flex;justify-content:flex-end;padding:10px 12px 0;height:0}
+.dx button{width:38px;height:38px;border-radius:50%;border:0;background:var(--onp);color:#fff;font-size:20px;line-height:1}
+.lv1 .art{aspect-ratio:16/7}
+.lv1 .art .emo{font-size:76px}
+.lv1 .bd{padding:16px 18px 18px}
+.lv1 .bd h3{font-size:clamp(25px,6vw,32px)}
+.lv1 .bd .sum{font-size:16.5px;color:var(--ink)}
+.lvl{display:flex;align-items:center;gap:8px;font-size:11.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);margin:0 18px}
+.lvl::after{content:"";flex:1;height:1px;background:var(--line)}
+.ftabs{display:flex;gap:5px;overflow-x:auto;scrollbar-width:none;padding:10px 18px 0}
+.ftabs::-webkit-scrollbar{display:none}
+.ftabs button{flex:none;border:0;background:var(--surface);box-shadow:0 0 0 1px var(--line);border-radius:99px;padding:7px 13px;font-size:13.5px;font-weight:800;color:var(--soft)}
+.ftabs button[aria-selected="true"]{background:var(--ink);color:var(--bg);box-shadow:none}
+.fb{padding:12px 18px 34px}
+.fb h4{font-size:12px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--soft);margin:16px 0 4px}
+.fb h4:first-child{margin-top:6px}
+.fb p{margin:0 0 4px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.kv{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:8px 10px;font-size:14px}
+.kv small{display:block;font-size:11px;color:var(--soft);font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+.bars{display:grid;gap:8px}
+.br{display:grid;grid-template-columns:1fr auto;gap:2px 10px;font-size:13.5px;align-items:center}
+.br .t{grid-column:1/-1;height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+.br .t span{display:block;height:100%;background:var(--ink)}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:9px 16px;border-radius:99px;font-weight:800;font-size:14px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:50}
+.toast.on{opacity:1}
+footer{color:var(--soft);font-size:13px;padding:6px 0 40px}
+footer b{font-family:"Bricolage Grotesque",sans-serif;color:var(--ink)}
+</style>
+</head>
+<body>
+<header class="nav"><div class="wrap">
+  <div class="bar">
+    <button class="logo" data-go="inicio" aria-label="Ir al inicio">THE SWEET EDIT<span>.</span></button>
+    <div class="mode" role="group" aria-label="Modo de lectura">
+      <button data-mode="edit" aria-pressed="true">The Edit</button><button data-mode="intel" aria-pressed="false">The Intel</button>
+    </div>
+  </div>
+  <nav class="tabs" role="tablist" id="tabs"></nav>
+</div></header>
+
+<main class="wrap">
+<section class="view" id="v-inicio">
+  <div class="mast">
+    <div class="desc">Global Sweet Industry Intelligence</div>
+    <h1>THE SWEET EDIT<b>.</b></h1>
+    <div class="tag">Where sweet meets strategy.</div>
+    <div class="es">Lo que se mueve en el mundo dulce.</div>
+    <div class="ed"><span class="chipd dk" id="m-ed"></span><span class="chipd" id="m-date"></span><span class="chipd">Borrador</span></div>
+  </div>
+  <div class="now" id="now"></div>
+  <div class="block"><div class="kick"><i style="--k:var(--peach)"></i>Historia principal</div><div id="hero"></div></div>
+  <div class="block"><h3>También destacado</h3><div id="top"></div></div>
+  <div class="block"><h3>Todas las historias</h3>
+    <input class="search" id="q" type="search" placeholder="Buscar marca, país o palabra clave" aria-label="Buscar">
+    <div class="chips" id="f-geo"></div><div class="chips" id="f-cat"></div>
+    <p class="count" id="cnt"></p><div id="all"></div>
+  </div>
+</section>
+
+<section class="view" id="v-fresh">
+  <div class="kick"><i style="--k:var(--lime)"></i>Fresh Drops</div>
+  <h2 class="sec">Lo nuevo en percha</h2>
+  <p class="dek">Lanzamientos, sabores, formatos y presentaciones.</p>
+  <div class="block" style="margin-top:6px"><h3>Pack Watch</h3><p class="small" style="margin:-6px 0 10px">Empaques nuevos de la semana. Toca “Ver imagen” para ver el empaque real.</p><div class="strip" id="pack"></div></div>
+  <div class="block"><h3>Lanzamientos</h3><div id="fresh"></div></div>
+</section>
+
+<section class="view" id="v-brand">
+  <div class="kick"><i style="--k:var(--lilac)"></i>Brand Moves</div>
+  <h2 class="sec">Lo que hacen las marcas</h2>
+  <p class="dek">Campañas, colaboraciones, licencias y estrategias de la competencia, en cualquier mercado.</p>
+  <div id="brand"></div>
+  <div class="block"><h3>Radar de competidores</h3>
+    <div class="chips" id="f-tier"></div><div class="stack" id="comp"></div><p class="note" id="comp-note"></p></div>
+</section>
+
+<section class="view" id="v-signals">
+  <div class="kick"><i style="--k:var(--pink)"></i>Sweet Signals</div>
+  <h2 class="sec">Patrones que se repiten</h2>
+  <p class="dek">Señales vistas en varias marcas o países: evidencia, dónde, desde cuándo y qué tan maduras están.</p>
+  <div class="stack" id="sig"></div>
+</section>
+
+<section class="view" id="v-consumer">
+  <div class="kick"><i style="--k:var(--pink)"></i>Consumer Decode</div>
+  <h2 class="sec">Qué quiere el consumidor</h2>
+  <p class="dek">Estudios y datos de consumo, con su lectura para snacks dulces.</p>
+  <div class="stack two" id="cons"></div>
+</section>
+
+<section class="view" id="v-deep">
+  <div class="kick"><i style="--k:var(--lilac)"></i>Deep Dive</div>
+  <h2 class="sec">Comparar para entender</h2>
+  <p class="dek">Benchmarks construidos con las historias de la edición.</p>
+  <div class="stack" id="deep"></div>
+</section>
+
+<section class="view" id="v-next">
+  <div class="kick"><i style="--k:var(--peach)"></i>What's Next</div>
+  <h2 class="sec">Lo que viene</h2>
+  <p class="dek">Fechas clave y movimientos por anticipar.</p>
+  <div class="stack two" id="nextc"></div>
+  <div class="block"><h3>Calendario dulce · Ecuador</h3><div class="card"><ul class="cal" id="cal"></ul></div></div>
+</section>
+
+<section class="view" id="v-mas">
+  <div class="kick"><i style="--k:var(--lime)"></i>Sobre The Sweet Edit.</div>
+  <h2 class="sec">Cómo se hace</h2>
+  <p class="dek">Descubrir lo interesante, comprender lo importante y transformar la información en oportunidades. <b>The Edit descubre. The Intel explica.</b></p>
+  <div class="block" style="margin-top:12px"><h3>Fuentes que seguimos</h3><div class="card"><table class="src" id="src"></table></div></div>
+  <div class="block"><h3>Cómo se puntúa la relevancia (0–100)</h3><div class="card"><div class="wt" id="wt"></div></div>
+    <p class="small" style="margin-top:8px">Alta: 75 o más · Media: 60–74 · Baja: menos de 60. El país no suma ni resta puntos. Fuentes consultadas el <span id="cons-d"></span>.</p></div>
+  <div class="block"><h3>Límites de esta edición</h3><div class="card"><ul style="margin:0;padding-left:18px;font-size:15px">
+    <li>Solo entran movimientos concretos de marcas; los datos generales de mercado van a Consumer Decode.</li>
+    <li>Las ilustraciones son referenciales. El botón “Ver imagen” abre una búsqueda de imágenes del producto real; las fotos propias o de prensa se sumarán cuando haya permiso de uso.</li>
+    <li>Instagram, X y TikTok no son accesibles para mí: para Merca2.0, Insights Ecuador y Aldasbrand uso tus capturas, sus webs y LinkedIn.</li>
+    <li>Cuando un resultado no es público, la ficha dice “No disponible públicamente”. No se inventan datos.</li>
+    <li>La relación entre Grupo Nutresa y La Universal está pendiente de verificación.</li>
+  </ul></div></div>
+  <div class="block" id="arch-b"><h3>Ediciones anteriores</h3><div class="card"><ul class="cal" id="arch"></ul></div></div>
+  <div class="block"><h3>Exportar</h3><div class="row"><button class="btn" id="cp-json">Copiar datos (JSON)</button><button class="btn ghost" id="cp-sum">Copiar resumen</button></div></div>
+</section>
+</main>
+<footer class="wrap"><b>THE SWEET EDIT.</b> · Where sweet meets strategy. · Borrador elaborado con fuentes públicas.</footer>
+
+<dialog id="dlg" aria-labelledby="d-t"></dialog>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const EDITION={name:"The Sweet Edit.",n:"03",date:"19 de octubre de 2026",consult:"19 oct 2026",period:"Semana del 12 al 18 de octubre de 2026"};
+const GEO={local:["Local","var(--local)"],entorno:["Entorno","var(--entorno)"],exterior:["Exterior","var(--exterior)"]};
+const CAT={"Competencia":"var(--c1)","Innovación":"var(--c2)","Consumidor":"var(--c3)","Tendencias":"var(--c4)","Packaging":"var(--c5)","Campañas":"var(--c6)","Retail":"var(--c7)","Pricing":"var(--c8)"};
+const CRIT=[["Impacto competitivo",25],["Innovación",25],["Aplicación en Ecuador",20],["Evidencia",15],["Actualidad",10],["Alcance",5]];
+
+const H=[
+{id:"TSE-2026-W42-001",imgq:"Bon Bon Bum J Balvin edición especial amarillo",sec:"brand",hl:"Bon Bon Bum se pinta de amarillo Balvin",sum:"Colombina lanza una edición especial con J Balvin en 15 países, Ecuador incluido.",e:"🍭",t:"Bon Bon Bum × J Balvin: edición especial amarilla en 15 países, incluido Ecuador",
+matriz:"Colombina S.A.",marca:"Bon Bon Bum",pais:"Colombia (regional, incluye Ecuador)",geo:"entorno",fev:"Desde noviembre 2026",fpub:"8 oct 2026",
+ind:"Snacks dulces",prod:"Chupetes",catP:"Competencia",catS:["Campañas","Packaging","Consumidor"],tipo:"Inteligencia competitiva",mov:"Edición especial con celebridad",aud:"Jóvenes, fans de la música urbana, familias",
+br:[23,19,20,13,9,5],
+what:"Colombina presentó una edición especial de Bon Bon Bum con J Balvin: empaque y palito amarillos, y el caramelo con la carita feliz con rayos del artista grabada; por dentro mantiene el caramelo rojo clásico. Producción estimada: unos 55 millones de unidades para 15 países, entre ellos EE.UU., España, Perú, Guatemala, Ecuador, Venezuela y Colombia. Según medios peruanos llega desde noviembre con el concepto “Siente tu BUM”. Como pieza de prensa, Colombina fabricó un disco de vinilo hecho con 40 chupetes que suena en un tocadiscos.",
+dif:"El producto se vuelve objeto de fan: color, grabado y empaque del artista, sin cambiar la receta.",
+ocasion:"Impulso, colección, regalo pequeño entre jóvenes.",
+estr:"Celebridad + edición especial + pieza de PR viral (disco de caramelo).",
+why:"Es el competidor regional directo en chupetes y la edición llega a Ecuador en plena temporada de fin de año. J Balvin también fue la cara de la campaña de Nutresa en 2026: la música urbana se disputa entre marcas del sector.",
+tend:"Celebridades y licencias · El empaque como objeto de fan",
+aprend:"Una edición de celebridad puede apoyarse solo en color, empaque y grabado: el costo industrial es bajo y el valor percibido sube.",
+opEc:"Vigilar precio y percha de la edición en Ecuador desde noviembre. Evaluar una edición propia con un referente local (música, fútbol) para Navidad o vacaciones de la Sierra.",
+lim:"No se publicó la lista completa de países ni la fecha exacta de llegada a Ecuador; los 55 millones son una proyección.",
+plazo:"Inmediata",res:"No disponible públicamente (lanzamiento en curso).",
+interp:"Colombina usa a la celebridad para rejuvenecer un ícono sin tocar el producto.",hip:"Es probable una activación en redes y punto de venta en Ecuador durante noviembre y diciembre.",conf:"Alta",
+conex:"Mismo artista que la campaña de Nutresa de 2026; se cruza con Ferrero × Marvel y Festival × Guerreras K-Pop (licencias).",kw:["J Balvin","edición especial","chupete","15 países"],
+src:[["Valora Analitik","https://www.valoraanalitik.com/nueva-colaboracion-entre-bon-bon-bum-y-j-balvin-proyecta-llevar-55-millones-de-bombones-a-15-paises/"],["Mercado Negro","https://www.mercadonegro.pe/marketing/j-balvin-bon-bon-bum/"],["Mix News Colombia","https://www.mixnewscolombia.com/2026/10/colombina-crea-el-primer-disco-de.html"]]},
+
+{id:"TSE-2026-W42-002",imgq:"BIScolé Bis sorvete Froneri Mini Bites",sec:"fresh",hl:"Bis salta del wafer al helado",sum:"Mondelēz lleva su wafer más famoso de Brasil al congelador con Froneri: paleta BIScolé y Mini Bites.",e:"🍦",t:"Bis entra a helados: BIScolé y Bis Mini Bites, fabricados por Froneri",
+matriz:"Mondelēz International (Lacta)",marca:"Bis",pais:"Brasil",geo:"exterior",fev:"Octubre 2026 (campaña en noviembre)",fpub:"13–16 oct 2026",
+ind:"Snacks dulces",prod:"Wafer / helados",catP:"Innovación",catS:["Competencia","Retail"],tipo:"Noticia",mov:"Extensión de marca por licencia",aud:"Jóvenes y adultos fans de la marca",
+br:[19,21,15,14,9,3],
+what:"Bis llega por primera vez a helados en sus 84 años, mediante licencia con Froneri (empresa conjunta de Nestlé y PAI Partners). BIScolé es una paleta con sabor a wafer, cobertura de chocolate y trozos de wafer (40 g según Meio & Mensagem; 45 g según Antihype). Bis Mini Bites son bocados en caja de 70,2 g para compartir. Llegan a congeladores en octubre; la campaña “Um novo jeito de pedir BIS” (WMcCann) arranca en la primera quincena de noviembre en digital, vía pública y supermercados.",
+dif:"El sabor de un wafer se traduce a otra temperatura y otra ocasión, con un fabricante experto.",
+ocasion:"Calor, antojo, compartir (Mini Bites).",
+estr:"Licencia de marca a una categoría vecina sin invertir en planta propia.",
+why:"Mondelēz monetiza el capital de un wafer fuera de su pasillo, y lo hace con un socio ligado a Nestlé, su rival.",
+tend:"Las marcas cruzan de categoría",
+aprend:"Una marca de wafer o chocolate con sabor reconocible puede vivir en helado a través de licencia, con bajo riesgo industrial.",
+opEc:"Explorar licencias de sabores icónicos de chocolate o wafer con heladeras locales para la temporada de calor en la Costa.",
+lim:"Requiere socio con cadena de frío y distribución en congeladores.",
+plazo:"Mediano plazo",res:"No disponible públicamente.",
+interp:"La categoría helado se vuelve vitrina de marcas de confitería.",hip:"Mondelēz podría repetir el modelo con otras marcas locales en LatAm.",conf:"Alta",
+conex:"Ferrero Rocher pasa a tableta y Mars lleva Twix a galleta: misma señal de cruce de categoría.",kw:["Bis","helado","licencia","Froneri"],
+src:[["Meio & Mensagem","https://www.meioemensagem.com.br/marketing/bis-faz-sua-estreia-no-mercado-de-sorvetes-no-brasil"],["Antihype","https://antihype.com.br/c/negocios/bis-sorvete-biscole-mini-bites-froneri/"],["GKPB","https://gkpb.com.br/199586/lacta-biscole/"]]},
+
+{id:"TSE-2026-W42-003",imgq:"Ferrero Marvel Kinder Joy Tic Tac Mister Fantastic Butterfinger Hulk",sec:"brand",hl:"Ferrero pone a Marvel en todo su portafolio",sum:"Kinder, Tic Tac, Crunch y Butterfinger tendrán personajes Marvel en EE.UU. desde el verano de 2027.",e:"🦸",t:"Ferrero × Marvel: licencia en todo su portafolio de EE.UU., más Tic Tac TWO",
+matriz:"Ferrero North America",marca:"Kinder Joy, Kinder Chocolate, Tic Tac, Crunch, Butterfinger",pais:"Estados Unidos",geo:"entorno",fev:"Verano 2027",fpub:"7 oct 2026",
+ind:"Snacks dulces",prod:"Chocolatería y confitería",catP:"Campañas",catS:["Competencia","Packaging","Innovación"],tipo:"Inteligencia competitiva",mov:"Licencia de entretenimiento en todo el portafolio",aud:"Niños, familias, fans de superhéroes",
+br:[21,19,13,15,8,4],
+what:"En el NACS Show (Las Vegas), Ferrero anunció una colaboración con Marvel para verano de 2027, en cajas y pasillo: Kinder Joy con juguetes Marvel (Spider-Man, Captain America, Black Panther), Kinder Chocolate con 20 tarjetas coleccionables, Tic Tac Berry & Lime con Mister Fantastic, Crunch Infinity Chocolate con Loki (edición limitada) y Butterfinger Green Apple Smash con Hulk. Incluye empaques personalizados, exhibidores, medios, influencers y promoción nacional. En la misma presentación mostró Tic Tac TWO (dos sabores, sin azúcar, otoño 2027) y Nutella Waffle congelado (primavera 2027).",
+dif:"Una sola licencia une cinco marcas: cada personaje se asigna a un sabor o producto.",
+ocasion:"Compra de impulso en caja, colección, regalo infantil.",
+estr:"Licencia paraguas + coleccionables + exhibición en punto de pago.",
+why:"Ferrero, de vigilancia máxima, escala la licencia de una edición (Stranger Things) a todo el portafolio. Es una señal de cómo competirá por el niño y el fan adulto en 2027.",
+tend:"Celebridades y licencias",
+aprend:"Asignar un personaje a cada producto ordena la percha y hace que la colección recorra varias marcas.",
+opEc:"Pensar licencias o personajes propios que agrupen chupetes, caramelos y chocolates en una sola exhibición de temporada.",
+lim:"Anuncio para EE.UU.; sin fecha para LatAm ni precios. Licencias globales con costo alto.",
+plazo:"Observación futura",res:"No disponible públicamente.",
+interp:"Las licencias pasan de táctica de temporada a plataforma anual.",hip:"Parte de la línea Kinder Marvel podría llegar a LatAm vía Kinder Joy.",conf:"Alta",
+conex:"Bon Bon Bum × J Balvin, Festival × Guerreras K-Pop y Cacau Show × Disney.",kw:["Marvel","Kinder Joy","Tic Tac","coleccionables","NACS"],
+src:[["Ferrero US · Sala de prensa","https://www.ferrero.com/us/en/news-stories/news/ferrero-builds-momentum-in-the-us-with-major-new-collaborations-and-creative-combinations"],["Food Dive","https://www.fooddive.com/news/ferrero-nutella-waffles-breakfast-innovation/832036/"]]},
+
+{id:"TSE-2026-W42-004",imgq:"Galletas Festival Guerreras K-Pop Netflix sandía",sec:"brand",hl:"Festival se une a las Guerreras K-Pop",sum:"Nutresa lanza una galleta morada con relleno de sandía y diseños de la película de Netflix.",e:"🎤",t:"Galletas Festival × Las Guerreras K-Pop (Netflix): galleta morada sabor sandía",
+matriz:"Grupo Nutresa (Noel)",marca:"Festival",pais:"Colombia",geo:"entorno",fev:"15 sep – 24 oct 2026",fpub:"14 oct 2026",
+ind:"Snacks dulces",prod:"Galletas",catP:"Campañas",catS:["Innovación","Consumidor","Retail"],tipo:"Caso de marketing",mov:"Licencia de entretenimiento + edición especial + promoción",aud:"Niños, preadolescentes, Generación Alpha",
+br:[19,18,17,13,9,3],
+what:"Galletas Festival lanzó una edición con la película de Netflix “Las Guerreras K-Pop”: galleta morada con forma nueva, diseños de HUNTR/X y del Honmoon, y relleno cremoso sabor sandía. La promoción nacional cubre toda la línea del 15 de septiembre al 24 de octubre, con premios como celulares y audífonos. Campaña 360 con creadores de contenido, digital, vía pública, relaciones públicas y más de 5.000 piezas en punto de venta.",
+dif:"La licencia cambia el producto (color, forma y sabor), no solo el empaque.",
+ocasion:"Lonchera, recreo, merienda.",
+estr:"Licencia de moda en Generación Alpha + sabor nuevo + promoción con premios.",
+why:"Festival se vende en Ecuador y compite en la lonchera. Usa una de las licencias más populares entre niños en 2026.",
+tend:"Celebridades y licencias · Sabores frutales en galleta",
+aprend:"El color y el sabor de la galleta pueden contar la historia de la licencia; la promoción con premios tecnológicos sostiene la rotación.",
+opEc:"Evaluar sabores frutales y colores llamativos en galletas o wafers para loncheras del ciclo Sierra, con un personaje de moda.",
+lim:"La nota no menciona si la edición llega a Ecuador. Sin precio.",
+plazo:"Inmediata",res:"No disponible públicamente.",
+interp:"Nutresa compite por la Generación Alpha con licencias globales.",hip:"Podría verse en Ecuador si la promoción se extiende.",conf:"Alta",
+conex:"Bon Bon Bum × J Balvin y Ferrero × Marvel. Grupo Nutresa: clasificación Relacionada.",kw:["Festival","Netflix","K-Pop","sandía","lonchera"],
+src:[["El Tiempo","https://www.eltiempo.com/amp/cultura/gente/galletas-festival-una-de-las-marcas-mas-iconicas-de-grupo-nutresa-se-une-a-netflix-y-las-guerreras-k-pop-3593408"]]},
+
+{id:"TSE-2026-W42-005",imgq:"Ferrero Rocher tableta Milk Dark 70% White Colombia",sec:"fresh",hl:"Ferrero Rocher pasa del bombón a la tableta",sum:"Tres tabletas premium (Milk, Dark 70% y White) llegan a Colombia.",e:"🍫",t:"Ferrero Rocher lanza tabletas premium en Colombia",
+matriz:"Ferrero",marca:"Ferrero Rocher",pais:"Colombia",geo:"entorno",fev:"Presentación 8 oct 2026",fpub:"9–14 oct 2026",
+ind:"Snacks dulces",prod:"Chocolatería",catP:"Competencia",catS:["Innovación"],tipo:"Inteligencia competitiva",mov:"Nuevo formato en el mercado",aud:"Adultos, compradores premium",
+br:[21,16,17,11,8,3],
+what:"Ferrero Rocher presentó en Bogotá (8 de octubre) su línea de tabletas: Milk (chocolate con leche, avellanas y relleno cremoso), Dark 70% (con avellanas y relleno) y White (chocolate blanco con avellana). No se informaron gramaje, precio ni canales.",
+dif:"La marca de bombón de regalo entra al consumo diario de tableta con relleno.",
+ocasion:"Autoconsumo premium, compartir, regalo informal.",
+estr:"Llevar una marca de regalo a la percha de tabletas.",
+why:"Colombia es mercado vecino; un movimiento así suele anticipar la llegada a mercados andinos, donde la tableta premium compite con el chocolate local.",
+tend:"Las marcas cruzan de categoría · Premiumización accesible",
+aprend:"Una marca de ocasión especial puede ganar frecuencia con un formato de consumo diario.",
+opEc:"Revisar la oferta de tabletas premium con relleno y prever la posible entrada de Rocher tabletas a Ecuador.",
+lim:"Sin precio, gramaje ni canales publicados.",
+plazo:"Mediano plazo",res:"No disponible públicamente.",
+interp:"Ferrero busca frecuencia, no solo temporadas de regalo.",hip:"Podría llegar a Ecuador en 2027.",conf:"Media",
+conex:"Bis a helado y Ghirardelli Dubai: marcas premium que estiran su formato.",kw:["Ferrero Rocher","tableta","premium","Colombia"],
+src:[["El Tiempo","https://eltiempo.com/vida/tendencias/ferrero-rocher-amplia-su-portafolio-en-colombia-con-el-lanzamiento-de-tabletas-de-chocolate-premium-3593671"],["Publimetro","https://www.publimetro.co/gourmetro/2026/10/09/del-bombon-a-la-tableta-asi-es-la-nueva-apuesta-de-chocolate-en-colombia/"]]},
+
+{id:"TSE-2026-W42-006",imgq:"Sour Patch Kids 13 Days of Mischief Wingstop Wicked Punch",sec:"brand",hl:"Sour Patch Kids convierte Halloween en travesura",sum:"13 días de campaña, salsa para alitas con Wingstop y tres productos nuevos de temporada.",e:"😈",t:"Sour Patch Kids: “13 Days of Mischief” y salsa con Wingstop",
+matriz:"Mondelēz International",marca:"Sour Patch Kids",pais:"Estados Unidos",geo:"entorno",fev:"19 oct – 5 nov 2026",fpub:"13 oct 2026",
+ind:"Snacks dulces",prod:"Gomitas",catP:"Campañas",catS:["Innovación","Packaging"],tipo:"Caso de marketing",mov:"Campaña de temporada + colaboración con restaurante",aud:"Jóvenes, Generación Z",
+br:[17,18,13,14,10,3],
+what:"Del 19 al 31 de octubre, Sour Patch Kids corre “13 Days of Mischief” en Instagram, TikTok y en persona, invitando a “sour-ficar” a otros. Con Wingstop lanza la salsa de edición limitada “Sour Patch Kids Wicked Punch” (acceso anticipado desde el 23 de octubre; venta nacional del 27 de octubre al 5 de noviembre). Nuevos productos: Monster Parts (8,88 oz, USD 4,29), Tricksters en caja de teatro (3,52 oz, USD 1,50) y Glow Ups Ghosts con confeti que brilla con luz negra (8,37 oz, USD 4,29).",
+dif:"La gomita sale del pasillo de dulces: su sabor ácido llega a una salsa de alitas.",
+ocasion:"Halloween, fiestas, comida rápida.",
+estr:"Personalidad de marca (travesura) + colaboración cruzada + formatos de temporada.",
+why:"Muestra cómo una marca de gomitas extiende su sabor a otras categorías para ganar conversación.",
+tend:"Ácido e intenso · Halloween fuera del pasillo de dulces",
+aprend:"Un rasgo de sabor (ácido) puede volverse plataforma de colaboraciones.",
+opEc:"Colaboraciones de sabor con cadenas locales de comida rápida o heladerías para Halloween o Navidad.",
+lim:"Las colaboraciones con restaurantes requieren socios con alcance nacional.",
+plazo:"Mediano plazo",res:"No disponible públicamente.",
+interp:"El sabor es la marca, más que el producto.",hip:"—",conf:"Alta",
+conex:"Oreo × Portillo's (también Mondelēz) y Skittles Crystals (ácido).",kw:["Sour Patch Kids","Wingstop","Halloween","ácido"],
+src:[["PR Newswire vía Finviz","https://finviz.com/news/401901/sour-patch-kids-declares-halloween-is-mischief-season-with-13-days-of-mischief"]]},
+
+{id:"TSE-2026-W42-007",imgq:"Ghirardelli Dubai Style Chocolate Squares pistachio kataifi",sec:"fresh",hl:"Ghirardelli se sube al chocolate Dubái",sum:"Sus clásicos Squares llegan rellenos de pistacho y kataifi crujiente.",e:"🟩",t:"Ghirardelli lanza Dubai Style Chocolate Squares",
+matriz:"Lindt & Sprüngli",marca:"Ghirardelli",pais:"Estados Unidos",geo:"entorno",fev:"Desde 14 oct 2026",fpub:"14–16 oct 2026",
+ind:"Snacks dulces",prod:"Chocolatería",catP:"Innovación",catS:["Tendencias","Packaging"],tipo:"Noticia",mov:"Nuevo sabor en formato icónico",aud:"Adultos, compradores premium",
+br:[16,17,13,15,10,3],
+what:"Ghirardelli lanzó Dubai Style Chocolate Squares: chocolate con leche relleno de pistacho y kataifi crujiente, en un cuadrado más alto para más relleno. Bolsa de 4,4 oz con piezas envueltas individualmente, USD 10,99 (precio sugerido), en grandes minoristas de EE.UU. y Ghirardelli.com.",
+dif:"Lleva la tendencia Dubái a un formato porcionado y masivo, no solo a tabletas artesanales.",
+ocasion:"Autoconsumo premium, compartir.",
+estr:"Sumarse a una tendencia viral con el formato más reconocible de la marca.",
+why:"Confirma que el chocolate Dubái ya pasó de moda viral a línea permanente de grandes marcas.",
+tend:"Pistacho y Dubái",
+aprend:"Una tendencia se masifica cuando entra al formato porcionado de una marca conocida.",
+opEc:"Bombones o mini tabletas con relleno tipo pistacho/crujiente para Navidad, con precio por pieza accesible.",
+lim:"Costo del pistacho; la tendencia puede estar cerca de su pico.",
+plazo:"Inmediata",res:"No disponible públicamente.",
+interp:"La tendencia Dubái se estabiliza como sabor premium.",hip:"Más marcas masivas lanzarán versiones porcionadas.",conf:"Alta",
+conex:"Jet y Jumbo Pistacho Dubái (Nutresa, jul 2026).",kw:["Dubái","pistacho","kataifi","Squares"],
+src:[["ConfectioneryNews","https://www.confectionerynews.com/Article/2026/10/16/ghirardelli-joins-dubai-chocolate-trend-with-revamped-squares/"],["Nosh · Comunicado","https://www.nosh.com/pr/2026/10/14/ghirardelli-brings-dubai-style-chocolate-to-its-iconic-squares"]]},
+
+{id:"TSE-2026-W42-008",imgq:"Mars 2027 Skittles Crystals Twix Frosted Cookie M&M's Peanut Butter Cinnamon Roll",sec:"fresh",hl:"Mars enseña sus cartas para 2027",sum:"Twix sin caramelo, Skittles con cristales ácidos y M&M's de cinnamon roll, presentados en el NACS Show.",e:"🔮",t:"Mars adelanta su línea 2027: Twix Frosted Cookie, Skittles Crystals y más",
+matriz:"Mars Wrigley",marca:"M&M's, Skittles, Twix, Snickers",pais:"Estados Unidos",geo:"entorno",fev:"2027",fpub:"9–14 oct 2026",
+ind:"Snacks dulces",prod:"Chocolatería y confitería",catP:"Innovación",catS:["Competencia","Tendencias"],tipo:"Inteligencia competitiva",mov:"Anticipo de lanzamientos",aud:"Masivo, jóvenes",
+br:[18,19,12,13,8,4],
+what:"En el NACS Show (7–9 oct), Mars presentó para 2027: M&M's Peanut Butter Cinnamon Roll, Skittles Crystals (gomitas con cristales ácidos, en Original y Tropical Splash), Twix Frosted Cookie (crema de vainilla en lugar de caramelo) y Snickers Almond Xtreme. Skittles Gummy Crystals debuta primero en TikTok Shop el 2 de noviembre, luego en algunos minoristas a fines de 2026 y a nivel nacional en 2027.",
+dif:"Sabores de panadería (cinnamon roll, galleta glaseada) dentro del chocolate y lanzamiento primero en una tienda de redes sociales.",
+ocasion:"Impulso, antojo.",
+estr:"Sabores de postre + texturas ácidas + primer canal digital.",
+why:"El mayor jugador de confitería marca la agenda de sabores del próximo año: panadería y ácido.",
+tend:"Sabores de panadería · Ácido e intenso",
+aprend:"Lanzar primero en un canal de redes crea expectativa y datos antes del retail.",
+opEc:"Probar sabores de panadería (pan de pascua, rosca, galleta glaseada) en chocolates o caramelos de Navidad.",
+lim:"Sin fechas exactas ni precios; enfocado en EE.UU.",
+plazo:"Observación futura",res:"No disponible públicamente.",
+interp:"Mars mezcla categorías dentro de sus propias marcas.",hip:"TikTok Shop se vuelve canal de prueba para gomitas.",conf:"Alta",
+conex:"Sour Patch Kids (ácido) y Bis/Rocher (cruce de categoría).",kw:["Mars","NACS","Skittles","Twix","TikTok Shop"],
+src:[["ConfectioneryNews","https://www.confectionerynews.com/Article/2026/10/14/mars-bets-big-on-confectionery-and-snackings-hottest-trends/"],["Sporked","https://sporked.com/article/mars-just-revealed-7-new-snacks-coming-in-2027-theyre-not-all-chocolate/"],["Food Dive","https://www.fooddive.com/news/leftovers-skittles-gives-gummies-some-crunch-cup-noodles-bites-back-for/832000/"]]},
+
+{id:"TSE-2026-W42-009",imgq:"Oreo Banana Pudding winner Twist Lick Vote 2027",sec:"brand",hl:"Banana Pudding gana la urna de Oreo",sum:"Cierra la votación: el sabor de pudín de plátano volverá en 2027.",e:"🍌",t:"Actualización: Oreo Banana Pudding gana la votación “Twist, Lick, Vote”",
+matriz:"Mondelēz International",marca:"Oreo",pais:"Estados Unidos",geo:"entorno",fev:"13 oct 2026",fpub:"13–15 oct 2026",
+ind:"Snacks dulces",prod:"Galletas",catP:"Campañas",catS:["Consumidor"],tipo:"Caso de marketing",mov:"Cierre de campaña de votación",aud:"Jóvenes adultos, fans de la marca",
+br:[17,14,14,13,10,4],
+what:"El 13 de octubre Oreo anunció que Banana Pudding ganó frente a Deep Fried y Chicken & Waffles. Tiene dos capas de crema de vainilla y plátano entre galletas sabor NILLA Wafer y regresará por tiempo limitado en 2027 (Sporked indica primavera). La votación corrió del 17 de agosto al 12 de octubre en OREO.com o con el QR del empaque.",
+dif:"Cierra el ciclo: el consumidor decide qué vuelve y la marca tiene un lanzamiento 2027 con demanda probada.",
+ocasion:"Antojo, prueba de sabores.",
+estr:"Participación del consumidor como validación de producto.",
+why:"Actualiza la historia principal de la Edición 02: ganó el sabor más cercano a postre clásico, no el más extravagante.",
+tend:"El empaque como canal · Sabores de postre",
+aprend:"En votaciones, el público tiende a premiar el sabor familiar; las opciones extremas sirven para generar conversación.",
+opEc:"En una votación local, incluir un sabor seguro (postre conocido) y uno provocador para conversación.",
+lim:"Mondelēz no publicó votos ni participación.",
+plazo:"Inmediata",res:"Ganó Banana Pudding. Número de votos: no disponible públicamente.",
+interp:"Lo extravagante atrae atención; lo familiar gana la compra.",hip:"El formato podría repetirse en 2027.",conf:"Alta",
+conex:"Edición 02 (Oreo convierte su empaque en urna).",kw:["Oreo","votación","Banana Pudding","2027"],
+src:[["Sporked","https://sporked.com/?p=79644"],["Pirates & Princesses","https://news.piratesandprincesses.net/p/oreo-banana-pudding-wins-the-fan"],["Oreo","https://www.oreo.com/twist-lick-vote-press-release"]]},
+
+{id:"TSE-2026-W42-010",imgq:"Arcor calabaza Halloween 2026 caramelos Arcor en Casa",sec:"fresh",hl:"Arcor vende Halloween en una calabaza",sum:"Calabaza plástica reutilizable con 200 g de caramelos, exclusiva de su tienda online.",e:"🎃",t:"Arcor: calabaza reutilizable de Halloween en su tienda propia",
+matriz:"Grupo Arcor",marca:"Caramelos Arcor, Mogul, Rocklets",pais:"Argentina",geo:"entorno",fev:"Octubre 2026",fpub:"9 oct 2026",
+ind:"Snacks dulces",prod:"Caramelos y gomitas",catP:"Packaging",catS:["Retail","Pricing"],tipo:"Noticia",mov:"Empaque de temporada + canal directo",aud:"Familias con niños",
+br:[16,15,16,12,8,2],
+what:"Arcor vende en su tienda oficial Arcor en Casa una calabaza plástica naranja con cara tenebrosa, reutilizable, con 200 g de caramelos frutales surtidos sin gluten, a ARS 19.973. Es parte de su línea de Halloween 2026, que incluye Osito Zombie Mogul Extreme (caja con forma de oso, 60 g) y Rocklets Mini Momia (10 g).",
+dif:"El envase es el accesorio para pedir dulces: se usa después de comer el producto.",
+ocasion:"Halloween, salir a pedir dulces.",
+estr:"Empaque reutilizable + venta directa al consumidor.",
+why:"Competidor de vigilancia máxima que usa su canal propio para vender kits de temporada a mejor precio por unidad.",
+tend:"El empaque como regalo · Venta directa de marca",
+aprend:"Un empaque reutilizable justifica un precio mayor y vive más allá del consumo.",
+opEc:"Kits de Halloween o Navidad con envase reutilizable (calabaza, bota, lata) en canales propios o en supermercados.",
+lim:"Halloween es una fecha menor en Ecuador frente a Difuntos; costo del envase plástico.",
+plazo:"Inmediata",res:"No disponible públicamente.",
+interp:"Arcor prueba su tienda online como canal de producto especial.",hip:"—",conf:"Alta",
+conex:"Cacau Show (lata y vaso Mickey) y Sour Patch Kids (productos de temporada).",kw:["Arcor","Halloween","calabaza","Arcor en Casa"],
+src:[["Infokioscos","https://infokioscos.com.ar/124015/la-clasica-calabaza-de-arcor-para-halloween-todo-lo-que-trae-y-cuanto-cuesta.html"],["Infokioscos · Catálogo","https://infokioscos.com.ar/123648/arcor-halloween-2026-catalogo-completo.html"]]},
+
+{id:"TSE-2026-W42-011",imgq:"Talento Cookies Caramelo Salgado Garoto",sec:"fresh",hl:"Talento suma galleta y caramelo salado",sum:"Garoto moderniza su tableta de 1993 con un sabor para adultos jóvenes.",e:"🧂",t:"Talento (Nestlé Brasil) lanza Cookies & Caramelo Salgado",
+matriz:"Nestlé (Garoto)",marca:"Talento",pais:"Brasil",geo:"exterior",fev:"Octubre 2026",fpub:"8 oct 2026",
+ind:"Snacks dulces",prod:"Chocolatería",catP:"Innovación",catS:["Consumidor"],tipo:"Noticia",mov:"Nuevo sabor",aud:"Adultos jóvenes",
+br:[16,15,14,14,8,2],
+what:"Nestlé Brasil lanzó Talento Cookies & Caramelo Salgado: tableta de chocolate con leche con trozos de galleta y caramelo salado, dirigida a adultos jóvenes, como parte de la modernización de una marca lanzada en 1993. Llega a puntos de venta en octubre. No se informan gramaje, precio ni canales.",
+dif:"Combina dos texturas (galleta crocante y caramelo) con el contraste dulce-salado.",
+ocasion:"Antojo, autoconsumo.",
+estr:"Renovar una marca madura con sabores de tendencia.",
+why:"Nestlé actualiza una marca de tableta con inclusiones: una forma de dar novedad cuando el cacao es caro.",
+tend:"Dulce-salado · Inclusiones y texturas",
+aprend:"Las inclusiones (galleta, caramelo) agregan valor y reducen la proporción de cacao.",
+opEc:"Tabletas o barras con inclusiones de galleta y caramelo salado para adultos jóvenes.",
+lim:"Pocos detalles comerciales.",
+plazo:"Mediano plazo",res:"No disponible públicamente.",
+interp:"Nestlé rejuvenece Garoto con sabores de postre.",hip:"—",conf:"Alta",
+conex:"Mars (sabores de panadería) y Milka Extra Fun (Edición 02).",kw:["Talento","Garoto","caramelo salado","cookies"],
+src:[["Nestlé Brasil · Sala de prensa","https://www.nestle.com.br/media/pressreleases/allpressreleases/talento-expande-portfolio-e-lanca-sabor-cookies-caramelo-salgado"]]},
+
+{id:"TSE-2026-W42-012",imgq:"Cacau Show calendário advento Mickey Natal 2026",sec:"brand",hl:"Cacau Show celebra Navidad con Mickey",sum:"Calendario de Adviento, vaso y lata de Disney con chocolates y minipanetones.",e:"🎄",t:"Cacau Show lanza Navidad 2026 con licencia Disney “Mickey & Amigos”",
+matriz:"Cacau Show",marca:"Cacau Show",pais:"Brasil",geo:"exterior",fev:"Navidad 2026",fpub:"2 oct 2026",
+ind:"Snacks dulces",prod:"Chocolatería",catP:"Packaging",catS:["Campañas","Pricing"],tipo:"Noticia",mov:"Línea estacional con licencia",aud:"Familias, regalo",
+br:[15,16,15,13,7,2],
+what:"Cacau Show lanzó su Navidad 2026 con Disney “Mickey & Amigos”: calendario de Adviento de 25 ventanas con minitabletas, bombones y trufas más 3 miniaturas coleccionables (R$159,99; R$149,99 para socios), vaso Mickey con bombones (R$84,99 / R$79,99) y minipanetones Mickey & Minnie en lata (R$54,99 / R$49,99).",
+dif:"Precio diferenciado para su club de clientes y empaques reutilizables con licencia.",
+ocasion:"Navidad, regalo, Adviento.",
+estr:"Licencia + empaque reutilizable + programa de lealtad.",
+why:"Muestra cómo una cadena de chocolate escalona precios de regalo con una licencia familiar.",
+tend:"Celebridades y licencias · El empaque como regalo",
+aprend:"Tres niveles de precio con la misma licencia cubren distintos presupuestos de regalo.",
+opEc:"Escalera de regalos navideños (pequeño, medio, alto) con empaque reutilizable, alineada al décimo tercer sueldo.",
+lim:"Costo de licencia Disney.",
+plazo:"Mediano plazo",res:"No disponible públicamente.",
+interp:"El calendario de Adviento se consolida como formato de regalo en LatAm.",hip:"—",conf:"Alta",
+conex:"Ferrero × Marvel; Arcor calabaza (empaque reutilizable).",kw:["Cacau Show","Disney","Adviento","Navidad"],
+src:[["Cacau & Chocolate","https://www.cacauechocolate.com.br/v1/2026/10/02/cacau-show-lanca-calendario-de-chocolates-com-mickey-e-amigos-para-o-natal-2026/"]]}
+];
+H.forEach(h=>h.score=h.br.reduce((a,b)=>a+b,0));H.sort((a,b)=>b.score-a.score);
+
+const NOW=[
+["Qué está pasando","Las <b>licencias y celebridades</b> toman la percha: J Balvin, Marvel, Guerreras K-Pop y Disney en una sola semana."],
+["Qué viene","Marcas que <b>cruzan de categoría</b>: wafer a helado, bombón a tableta, Twix a galleta."],
+["Señales en crecimiento","Lo <b>ácido</b> y los <b>sabores de postre</b> (pistacho Dubái, cinnamon roll, caramelo salado) marcan la innovación 2027."]
+];
+
+const CONSUMER=[
+{e:"🛒",t:"Halloween se compra dos veces",src:["The Shelby Report (Mars + Morning Consult)","https://theshelbyreport.com/2026/10/06/mars-survey-halloween-candy-shoppers-restock/"],f:"6 oct 2026",dato:"Más de 40% de compradores en EE.UU. repone dulces para no quedarse sin stock, y cerca de 2 de cada 5 compra una bolsa aparte para su hogar.",lectura:"La temporada genera compra para repartir y compra para el hogar: dos empaques, dos mensajes."},
+{e:"🍬",t:"Chocolate primero, gomitas segundo",src:["WRNJ Radio (National Confectioners Association)","https://wrnjradio.com/survey-81-of-americans-plan-to-celebrate-halloween-chocolate-tops-candy-favorites/"],f:"9 oct 2026",dato:"81% de los estadounidenses celebrará Halloween; el chocolate es el favorito, seguido de las gomitas, y más de un cuarto compró dulces de temporada antes de octubre.",lectura:"La temporada empieza antes: la exhibición llega a la percha en septiembre."},
+{e:"🏆",t:"Las gomitas ácidas suben en el ranking",src:["WLS-AM (CandyStore.com)","https://www.wlsam.com/2026/10/14/here-is-the-most-popular-halloween-candy-in-2026/"],f:"14 oct 2026",dato:"Ranking 2026: M&M's, Sour Patch Kids, Skittles, Reese's Cups y NERDS Gummy Clusters (nuevo en el top 5).",lectura:"Tres de los cinco más vendidos son confitería no chocolate con sabores intensos."}
+];
+
+const DEEP=[
+{t:"Licencias: quién usa a quién",dek:"Cuatro movimientos de licencia o celebridad en la misma semana.",cols:["Marca","Licencia","Qué cambia en el producto"],
+rows:[["Bon Bon Bum · Colombina","J Balvin","Empaque y palito amarillos, caramelo grabado"],["Ferrero · EE.UU.","Marvel","Juguetes, tarjetas y personaje por producto"],["Festival · Nutresa","Las Guerreras K-Pop (Netflix)","Galleta morada, forma nueva y sabor sandía"],["Cacau Show · Brasil","Disney Mickey & Amigos","Calendario, vaso y lata coleccionables"]],
+fact:"Los cuatro casos están documentados en las fichas de esta edición.",interp:"Las licencias van desde un solo artista (bajo cambio industrial) hasta un universo que reorganiza todo el portafolio.",hip:"Para Ecuador, una celebridad o personaje local en el empaque puede dar el efecto de licencia con menor costo.",ids:["TSE-2026-W42-001","TSE-2026-W42-003","TSE-2026-W42-004","TSE-2026-W42-012"]},
+{t:"Marcas que cruzan de categoría",dek:"El capital de marca viaja a formatos nuevos.",cols:["Marca","De","A"],
+rows:[["Bis · Mondelēz Brasil","Wafer","Helado (licencia con Froneri)"],["Ferrero Rocher · Colombia","Bombón","Tableta"],["Twix · Mars","Barra con caramelo","Galleta glaseada (2027)"],["Ghirardelli · Lindt","Squares clásicos","Relleno tipo Dubái"]],
+fact:"Bis, Ferrero Rocher y Ghirardelli ya están en el mercado; Twix Frosted Cookie es un anuncio para 2027.",interp:"Las marcas buscan crecer en ocasiones nuevas en vez de subir el precio de la misma.",hip:"Una marca local de chocolate o wafer podría probar helado o galleta mediante un socio.",ids:["TSE-2026-W42-002","TSE-2026-W42-005","TSE-2026-W42-008","TSE-2026-W42-007"]}
+];
+
+const NEXT=[
+{t:"Skittles Gummy Crystals llega primero a TikTok Shop",tipo:"Fecha clave",hz:"2 nov 2026",pais:"EE.UU.",d:"Mars lanzará sus gomitas con cristales ácidos primero en TikTok Shop y luego en retail.",l:"Ver si el canal de redes sociales se vuelve la primera prueba de lanzamientos de confitería.",src:["Food Dive","https://www.fooddive.com/news/leftovers-skittles-gives-gummies-some-crunch-cup-noodles-bites-back-for/832000/"]},
+{t:"Perfetti Van Melle elimina colorantes artificiales",tipo:"Prospectiva",hz:"2027",pais:"EE.UU.",d:"Más de 650 productos (Airheads, Chupa Chups, Mentos, Trident) se reformularán con nuevas etiquetas; los primeros llegan en 2027.",l:"Se suma a Colombina (312 referencias sin colorantes): la etiqueta limpia llega a chupetes y caramelos.",src:["Confectionery Production","https://www.confectioneryproduction.com/news/59885/perfetti-van-melle-us-moves-to-phase-out-confectionery-artificial-colours/"]},
+{t:"Pepero Day con Stray Kids",tipo:"Fecha clave",hz:"11 nov 2026",pais:"Corea / global",d:"Lotte Wellfood tiene a Stray Kids como embajadores de Pepero Day; la campaña global pasó de 15 a 35 regiones.",l:"Una fecha creada por una marca que se volvió global: modelo para fechas propias.",src:["Star News Korea","https://www.starnewskorea.com/en/business-life/2026/09/10/2026091009052032478"]}
+];
+
+const CAL=[["31 oct – 3 nov","Feriado largo: Halloween, Difuntos (2 nov) e Independencia de Cuenca (3 nov)"],["Desde nov","Bon Bon Bum × J Balvin llega a la región"],["16 nov","Décimo tercer sueldo del sector público (adelantado)"],["20 nov","Fin de semana largo (Festival de Artes Vivas de Loja)"],["27 nov","Black Friday"],["6–7 dic","Fiestas de Quito"],["Hasta 24 dic","Décimo tercer sueldo sector privado y regalos navideños"]];
+
+const SIGNALS=[
+{t:"Licencias y celebridades en todo el portafolio",m:"Consolidada",since:"antes de 2025",where:"Colombia, EE.UU., Brasil",ev:"Bon Bon Bum × J Balvin, Ferrero × Marvel, Festival × Guerreras K-Pop, Cacau Show × Disney"},
+{t:"Las marcas cruzan de categoría",m:"En crecimiento",since:"2026",where:"Brasil, Colombia, EE.UU.",ev:"Bis a helado, Ferrero Rocher a tableta, Twix Frosted Cookie, Ghirardelli galletas (Ed. 02)"},
+{t:"Ácido e intenso",m:"En crecimiento",since:"2025",where:"EE.UU.",ev:"Skittles Crystals, Sour Patch Kids × Wingstop, NERDS Gummy Clusters en el top 5 de Halloween"},
+{t:"Sabores de postre y panadería",m:"Emergente",since:"2026",where:"EE.UU., Brasil",ev:"Oreo Banana Pudding gana, M&M's Cinnamon Roll, Talento Cookies & Caramelo Salgado"},
+{t:"Pistacho y Dubái en formato masivo",m:"Consolidada",since:"2024",where:"EE.UU., Colombia",ev:"Ghirardelli Dubai Squares, Jet y Jumbo Pistacho Dubái (jul 2026)"}
+];
+
+const COMP=[
+{n:"Nestlé",tier:"Máxima",mv:[["Brasil","Talento Cookies & Caramelo Salgado (Garoto)","8 oct 2026"],["Reino Unido","Regresa KitKat 4 Finger White (41,5 g, 89p), exclusivo mayorista y conveniencia","15 oct 2026"],["EE.UU.","Toll House: primer calendario de Adviento de galletas","10 oct 2026"],["Brasil","Froneri (empresa conjunta de Nestlé) fabrica los helados Bis de Mondelēz","oct 2026"]]},
+{n:"Mondelēz",tier:"Máxima",mv:[["Brasil","Bis entra a helados: BIScolé y Mini Bites","13–16 oct 2026"],["EE.UU.","Oreo: Banana Pudding gana la votación y vuelve en 2027","13 oct 2026"],["EE.UU.","Sour Patch Kids “13 Days of Mischief” + Wingstop","13 oct 2026"],["EE.UU.","Oreo × Portillo's: trío de postres de Halloween","6 oct 2026"]]},
+{n:"Ferrero",tier:"Máxima",mv:[["EE.UU.","Licencia Marvel en Kinder, Tic Tac, Crunch y Butterfinger (verano 2027); Tic Tac TWO","7 oct 2026"],["Colombia","Ferrero Rocher lanza tabletas Milk, Dark 70% y White","8 oct 2026"],["EE.UU.","Más de USD 50 millones para comerciales de Kinder Bueno y Nutella en el Big Game 2027","5–6 oct 2026"]]},
+{n:"Arcor",tier:"Máxima",mv:[["Argentina","Calabaza reutilizable de Halloween con 200 g de caramelos en Arcor en Casa","9 oct 2026"]]},
+{n:"Colombina",tier:"Máxima",mv:[["Regional (incl. Ecuador)","Bon Bon Bum × J Balvin: 55 millones de unidades en 15 países","8 oct 2026"],["Colombia / exportación","Portafolio de Halloween: barquillos Piazza temáticos y surtidos","3 oct 2026"]]},
+{n:"Confiteca",tier:"Máxima",mv:[["Ecuador","Sin movimientos verificados esta semana","—"]]},
+{n:"Mars Wrigley",tier:"Ampliada",mv:[["EE.UU.","Línea 2027 en NACS: Skittles Crystals, Twix Frosted Cookie, M&M's PB Cinnamon Roll","9–14 oct 2026"]]},
+{n:"Hershey",tier:"Ampliada",mv:[["EE.UU.","Reese's cambia la leyenda del empaque de sus calabazas tras una demanda","13 oct 2026"]]},
+{n:"Lindt & Sprüngli",tier:"Ampliada",mv:[["EE.UU.","Ghirardelli Dubai Style Chocolate Squares","14 oct 2026"],["Global","Navidad 2026: Lindor Cinnamon Roll y calendarios personalizables","29 sep 2026"]]},
+{n:"Meiji · Glico",tier:"Ampliada",mv:[["Japón","Meiji Kinoko no Yama / Takenoko no Sato “Minna no Black”","13 oct 2026"],["Japón","Glico renueva Pocky de invierno con harina integral","6 oct 2026"]]},
+{n:"Paccari",tier:"Ampliada",mv:[["Reino Unido","Elegida “Best Buy” en la guía de chocolate de Ethical Consumer","1 oct 2026"]]},
+{n:"Grupo Nutresa",tier:"Relacionada",note:"El 19 jun 2026 se informó un contrato de Nutresa para comprar el 100% de La Universal, sujeto a autorizaciones regulatorias (El Universo). No se encontró confirmación del cierre: la relación societaria sigue pendiente de verificación.",mv:[["Colombia","Galletas Festival × Las Guerreras K-Pop (Netflix): galleta morada sabor sandía","14 oct 2026"]]}
+];
+const COMP_NOTE="República del Cacao, Grupo Bimbo, PepsiCo y Lotte: sin movimientos relevantes verificados esta semana (Pepero Day de Lotte, en Próximamente).";
+
+const PACK=[
+{e:"💛",q:"Bon Bon Bum J Balvin edición especial amarillo",b:"Bon Bon Bum × J Balvin",p:"Colombia / regional",k:"Licencia",d:"Empaque y palito amarillos, caramelo grabado con la carita del artista.",f:"oct 2026",src:"https://www.valoraanalitik.com/nueva-colaboracion-entre-bon-bon-bum-y-j-balvin-proyecta-llevar-55-millones-de-bombones-a-15-paises/"},
+{e:"🦸",q:"Ferrero Marvel Tic Tac Mister Fantastic Kinder Joy",b:"Ferrero × Marvel",p:"EE.UU.",k:"Licencia",d:"Empaques con personajes Marvel en cinco marcas, desde verano 2027.",f:"oct 2026",src:"https://www.ferrero.com/us/en/news-stories/news/ferrero-builds-momentum-in-the-us-with-major-new-collaborations-and-creative-combinations"},
+{e:"🎃",q:"Arcor calabaza Halloween 2026",b:"Arcor · Calabaza",p:"Argentina",k:"Formato",d:"Calabaza plástica reutilizable con 200 g de caramelos.",f:"oct 2026",src:"https://infokioscos.com.ar/124015/la-clasica-calabaza-de-arcor-para-halloween-todo-lo-que-trae-y-cuanto-cuesta.html"},
+{e:"🐭",q:"Cacau Show calendário advento Mickey Natal 2026",b:"Cacau Show × Disney",p:"Brasil",k:"Licencia",d:"Calendario de 25 ventanas, vaso Mickey y lata de minipanetones.",f:"oct 2026",src:"https://www.cacauechocolate.com.br/v1/2026/10/02/cacau-show-lanca-calendario-de-chocolates-com-mickey-e-amigos-para-o-natal-2026/"},
+{e:"🍦",q:"Bis Mini Bites sorvete caixa",b:"Bis Mini Bites",p:"Brasil",k:"Formato",d:"Caja de 70,2 g de bocados helados para compartir.",f:"oct 2026",src:"https://www.meioemensagem.com.br/marketing/bis-faz-sua-estreia-no-mercado-de-sorvetes-no-brasil"},
+{e:"🟩",q:"Ghirardelli Dubai Style Chocolate Squares bag",b:"Ghirardelli Dubai Squares",p:"EE.UU.",k:"Diseño",d:"Cuadrado más alto, piezas envueltas individualmente en bolsa de 4,4 oz.",f:"oct 2026",src:"https://www.confectionerynews.com/Article/2026/10/16/ghirardelli-joins-dubai-chocolate-trend-with-revamped-squares/"},
+{e:"🎭",q:"Sour Patch Kids Tricksters theater box Halloween",b:"Sour Patch Kids Tricksters",p:"EE.UU.",k:"Formato",d:"Caja tipo teatro de 3,52 oz a USD 1,50.",f:"oct 2026",src:"https://finviz.com/news/401901/sour-patch-kids-declares-halloween-is-mischief-season-with-13-days-of-mischief"},
+{e:"⚖️",q:"Reese's Peanut Butter Pumpkin carving not on actual product",b:"Reese's Pumpkins",p:"EE.UU.",k:"Material",d:"Nueva leyenda “carving not on actual product” tras una demanda.",f:"oct 2026",src:"https://www.confectionerynews.com/Article/2026/10/13/hershey-changes-reeses-packaging-following-lawsuit/"},
+{e:"🍪",q:"Nestle Toll House cookie dough advent calendar",b:"Toll House · Adviento",p:"EE.UU.",k:"Diseño",d:"Primer calendario de Adviento de masas de galleta; las puertas sirven como tarjetas navideñas.",f:"oct 2026",src:"https://www.confectionerynews.com/Article/2026/10/10/nestle-launches-its-first-ever-cookie-advent-calendar/"}
+];
+
+const SOURCES=[
+["Salas de prensa de marcas","Web","Ferrero US, Nestlé Brasil, Oreo, Ghirardelli","✅ Fuente primaria"],
+["ConfectioneryNews · Food Dive · Confectionery Production","Web","Lanzamientos globales","✅ Artículos abiertos; portada de ConfectioneryNews no accesible esta semana"],
+["Snack & Bakery · Candy Industry","Web","Lanzamientos EE.UU.","⚠️ Varios artículos no se pudieron abrir esta semana"],
+["Talking Retail · DFNI","Web","Reino Unido y travel retail","⚠️ Bloquean la lectura automática; solo titulares"],
+["Valora Analitik · El Tiempo · La República · Meio & Mensagem","Prensa regional","Colombia y Brasil","✅ Acceso abierto"],
+["Primicias · El Universo · Expreso","Prensa Ecuador","Movimientos locales","✅ Acceso abierto · poco movimiento de marcas dulces esta semana"],
+["Instagram · X · TikTok","Redes","Campañas en redes","⚠️ No accesibles para mí; no se revisaron"]
+];
+
+// Lista de ediciones: [número, fecha, ruta]. La más reciente primero.
+const ARCHIVE=[["03","19 de octubre de 2026","../ediciones/edicion-03.html"],["02","12 de octubre de 2026","../ediciones/edicion-02.html"]];
+
+</script>
+<script>
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const lvl=s=>s>=75?"Alta":s>=60?"Media":"Baja";
+const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+const SEC={fresh:"Fresh Drop",brand:"Brand Move"};
+const TABS=[["inicio","Inicio"],["fresh","Fresh Drops"],["brand","Brand Moves"],["signals","Sweet Signals"],["consumer","Consumer Decode"],["deep","Deep Dive"],["next","What's Next"],["mas","Más"]];
+let MODE=store.get("tse-mode")==="intel"?"intel":"edit";
+
+$("#m-ed").textContent=`Edición ${EDITION.n}`;$("#m-date").textContent=EDITION.date;
+$("#tabs").innerHTML=TABS.map(([k,l])=>`<button role="tab" data-t="${k}" aria-selected="false">${l}</button>`).join("");
+function show(k){
+  document.querySelectorAll(".view").forEach(v=>v.classList.toggle("on",v.id==="v-"+k));
+  document.querySelectorAll("#tabs button").forEach(b=>{const on=b.dataset.t===k;b.setAttribute("aria-selected",on);if(on){const r=$("#tabs");r.scrollLeft=b.offsetLeft-r.clientWidth/2+b.offsetWidth/2}});
+  store.set("tse-tab",k);window.scrollTo({top:0});
+}
+$("#tabs").addEventListener("click",e=>{const b=e.target.closest("button");if(b)show(b.dataset.t)});
+document.addEventListener("click",e=>{const g=e.target.closest("[data-go]");if(g)show(g.dataset.go)});
+
+const imgURL=q=>"https://www.google.com/search?tbm=isch&q="+encodeURIComponent(q);
+const imgBtn=q=>`<a class="imgbtn" href="${imgURL(q)}" target="_blank" rel="noopener">📷 Ver imagen ↗</a>`;
+const shortP=p=>p.split(" (")[0];
+function story(h,hero){
+  const [gl,gc]=GEO[h.geo];
+  return `<article class="story${hero?" hero":""}" data-id="${h.id}" tabindex="0" role="button" aria-label="${esc(h.hl)}" style="--cc:${CAT[h.catP]}">
+   <div class="art"><span class="sec-l">${SEC[h.sec]}</span><span class="rel">${h.score}<small>${lvl(h.score)}</small></span><span class="emo" aria-hidden="true">${h.e}</span><span class="cat">${h.catP}</span></div>
+   <div class="bd"><h3>${esc(h.hl)}</h3><p class="sum">${esc(h.sum)}</p>
+    <div class="meta"><span><b>${esc(h.marca.split(",")[0])}</b> · ${esc(h.matriz.split(" (")[0])}</span><span class="geo" style="--g:${gc}">${esc(shortP(h.pais))}</span><span>${esc(h.fpub)}</span></div>
+    <div class="tags">${h.catS.map(t=>`<span class="tg">${t}</span>`).join("")}</div>
+    <div class="srcl"><span>Fuente: ${esc(h.src[0][0])}${h.src.length>1?` + ${h.src.length-1}`:""}</span>${imgBtn(h.imgq)}</div></div></article>`;
+}
+function irow(h){
+  return `<button class="irow" data-id="${h.id}" style="--cc:${CAT[h.catP]}"><span class="sc">${h.score}<small>${lvl(h.score)}</small></span>
+   <span><h4>${esc(h.hl)}</h4><span class="meta" style="margin-top:4px"><span><b>${esc(h.marca.split(",")[0])}</b></span><span class="geo" style="--g:${GEO[h.geo][1]}">${esc(shortP(h.pais))}</span><span>${h.catP}</span><span class="pl">${h.plazo}</span><span>Confianza ${h.conf.toLowerCase()}</span></span>
+   <span class="op"><b>Oportunidad Ecuador:</b> ${esc(h.opEc)}</span></span></button>`;
+}
+const mini=h=>`<button class="mini" data-open="${h.id}" style="--cc:${CAT[h.catP]}"><span class="e" aria-hidden="true">${h.e}</span><span><b>${esc(h.hl)}</b><small>${esc(h.marca.split(",")[0])} · ${esc(shortP(h.pais))} · ${h.catP}</small></span><span class="s">${h.score}</span></button>`;
+const list=arr=>MODE==="edit"?`<div class="grid">${arr.map(h=>story(h)).join("")}</div>`:`<div class="rows">${arr.map(irow).join("")}</div>`;
+
+const F={geo:"all",cat:"all",q:""};
+function chips(el,key,opts){
+  el.innerHTML=opts.map(([v,l])=>`<button class="chip" data-v="${v}" aria-pressed="${F[key]===v}">${l}</button>`).join("");
+  el.onclick=e=>{const b=e.target.closest(".chip");if(!b)return;F[key]=b.dataset.v;el.querySelectorAll(".chip").forEach(c=>c.setAttribute("aria-pressed",c===b));renderAll()};
+}
+chips($("#f-geo"),"geo",[["all","Todo el mundo"],["local","Ecuador"],["entorno","América"],["exterior","Resto del mundo"]]);
+chips($("#f-cat"),"cat",[["all","Toda categoría"],...Object.keys(CAT).filter(c=>H.some(h=>h.catP===c||h.catS.includes(c))).map(c=>[c,c])]);
+$("#q").addEventListener("input",e=>{F.q=e.target.value.toLowerCase();renderAll()});
+function renderAll(){
+  const r=H.filter(h=>(F.geo==="all"||h.geo===F.geo)&&(F.cat==="all"||h.catP===F.cat||h.catS.includes(F.cat))&&(!F.q||JSON.stringify(h).toLowerCase().includes(F.q)));
+  $("#cnt").textContent=`${r.length} de ${H.length} historias`;
+  $("#all").innerHTML=r.length?(MODE==="edit"?`<div class="card" style="padding:6px 12px">${r.map(mini).join("")}</div>`:list(r)):`<p class="small">Sin resultados con estos filtros.</p>`;
+}
+function renderStories(){
+  $("#hero").innerHTML=MODE==="edit"?story(H[0],true):`<div class="rows">${irow(H[0])}</div>`;
+  $("#top").innerHTML=list(H.slice(1,5));
+  $("#fresh").innerHTML=list(H.filter(h=>h.sec==="fresh"));
+  $("#brand").innerHTML=list(H.filter(h=>h.sec==="brand"));
+  renderAll();
+}
+$("#now").innerHTML=NOW.map((n,i)=>`<div class="nc"><div class="n"><i style="--k:${["var(--lime)","var(--peach)","var(--pink)"][i]}"></i>${n[0]}</div><p>${n[1]}</p></div>`).join("");
+
+document.querySelectorAll(".mode button").forEach(b=>b.onclick=()=>{MODE=b.dataset.mode;store.set("tse-mode",MODE);document.querySelectorAll(".mode button").forEach(x=>x.setAttribute("aria-pressed",x===b));renderStories()});
+document.querySelectorAll(".mode button").forEach(x=>x.setAttribute("aria-pressed",x.dataset.mode===MODE));
+renderStories();
+
+/* pack */
+const KC={"Canal":"var(--pink)","Formato":"var(--lime)","Material":"var(--lime)","Diseño":"var(--lilac)","Licencia":"var(--peach)"};
+$("#pack").innerHTML=PACK.map(p=>`<div class="pk" style="--kc:${KC[p.k]}"><a class="ph" href="${imgURL(p.q)}" target="_blank" rel="noopener" aria-label="Ver imagen de ${esc(p.b)}"><span class="l">${p.k}</span><span aria-hidden="true">${p.e}</span></a><div class="tx"><b>${esc(p.b)}</b>${esc(p.d)}<small>${p.p} · ${p.f}</small><div class="row" style="margin-top:8px;gap:6px">${imgBtn(p.q)}<a class="tg" href="${p.src}" target="_blank" rel="noopener" style="text-decoration:none">Fuente ↗</a></div></div></div>`).join("");
+
+/* competitors */
+let tier="all";
+function renderComp(){
+  $("#comp").innerHTML=COMP.filter(c=>tier==="all"||c.tier===tier).map(c=>`<article class="card comp"><h3>${c.n}<span class="tg">${c.tier==="Relacionada"?"Relacionada":"Prioridad "+c.tier.toLowerCase()}</span></h3>
+   ${c.note?`<div class="note">⚠️ ${c.note}</div>`:""}<div class="mv">${c.mv.map(m=>`<span class="w">${m[0]}</span><span>${esc(m[1])}<small>${m[2]}</small></span>`).join("")}</div></article>`).join("");
+}
+$("#f-tier").innerHTML=[["all","Todas"],["Máxima","Prioridad máxima"],["Ampliada","Prioridad ampliada"],["Relacionada","Relacionada"]].map(([v,l])=>`<button class="chip" data-v="${v}" aria-pressed="${v==="all"}">${l}</button>`).join("");
+$("#f-tier").onclick=e=>{const b=e.target.closest(".chip");if(!b)return;tier=b.dataset.v;$("#f-tier").querySelectorAll(".chip").forEach(c=>c.setAttribute("aria-pressed",c===b));renderComp()};
+renderComp();$("#comp-note").textContent=COMP_NOTE;
+
+/* signals / consumer / deep / next */
+const MAT={"Emergente":[33,"var(--pink)"],"En crecimiento":[66,"var(--lilac)"],"Consolidada":[100,"var(--lime)"]};
+$("#sig").innerHTML=SIGNALS.map(s=>{const[p,c]=MAT[s.m];return `<article class="card sig"><div class="mat" style="--mc:${c}"><div class="m"><span style="height:${p}%"></span></div>${s.m}</div>
+ <div><h3>${esc(s.t)}</h3><p><b>Evidencia:</b> ${s.ev}</p><p class="small" style="margin-top:6px">📍 ${s.where} · desde ${s.since}</p></div></article>`}).join("");
+$("#cons").innerHTML=CONSUMER.map((c,i)=>`<article class="card cd"><div class="top"><span class="em" style="--k:${["var(--lilac)","var(--peach)","var(--pink)"][i%3]}">${c.e}</span><div><h3>${esc(c.t)}</h3><span class="small">${c.f} · <a href="${c.src[1]}" target="_blank" rel="noopener">${c.src[0]}</a></span></div></div>
+ <div class="ev" style="--e:var(--fact)"><small>Dato</small><p>${esc(c.dato)}</p></div><div class="ev" style="--e:var(--interp)"><small>Lectura</small><p>${esc(c.lectura)}</p></div></article>`).join("");
+const titleOf=id=>(H.find(h=>h.id===id)||{}).hl||id;
+$("#deep").innerHTML=DEEP.map(d=>`<article class="card"><h3 style="font-size:24px">${esc(d.t)}</h3><p class="small" style="margin:4px 0 0">${esc(d.dek)}</p>
+ <div class="tw"><table class="dd"><thead><tr>${d.cols.map(c=>`<th>${c}</th>`).join("")}</tr></thead><tbody>${d.rows.map(r=>`<tr>${r.map(c=>`<td>${esc(c)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>
+ <div class="ev" style="--e:var(--fact)"><small>Hecho</small><p>${esc(d.fact)}</p></div><div class="ev" style="--e:var(--interp)"><small>Interpretación</small><p>${esc(d.interp)}</p></div><div class="ev" style="--e:var(--hyp)"><small>Hipótesis para Ecuador</small><p>${esc(d.hip)}</p></div>
+ <div class="rel-l">${d.ids.map(id=>`<button data-open="${id}">${esc(titleOf(id))} →</button>`).join("")}</div></article>`).join("");
+$("#nextc").innerHTML=NEXT.map(n=>`<article class="card nx"><div class="tags" style="margin-bottom:8px"><span class="tg">${n.tipo}</span><span class="tg">⏱ ${n.hz}</span><span class="tg">📍 ${esc(n.pais)}</span></div><h3>${esc(n.t)}</h3><p style="margin:0">${esc(n.d)}</p>
+ <div class="ev" style="--e:var(--interp)"><small>Lectura</small><p>${esc(n.l)}</p></div><p class="small" style="margin-top:8px">Fuente: <a href="${n.src[1]}" target="_blank" rel="noopener">${n.src[0]}</a></p></article>`).join("");
+$("#cal").innerHTML=CAL.map(c=>`<li><b>${c[0]}</b><span>${c[1]}</span></li>`).join("");
+$("#src").innerHTML=SOURCES.map(s=>`<tr><td>${s[0]}<small>${s[1]}</small></td><td>${s[2]}<small>${s[3]}</small></td></tr>`).join("");
+$("#wt").innerHTML=CRIT.map(c=>`<span>${c[0]}</span><span>${c[1]}</span>`).join("");
+$("#cons-d").textContent=EDITION.consult;
+if(typeof ARCHIVE!=="undefined"&&ARCHIVE.length){$("#arch").innerHTML=ARCHIVE.map(x=>`<li><b>Edición ${x[0]}</b><span><a href="${x[2]}">${x[1]}</a></span></li>`).join("")}else{$("#arch-b").hidden=true}
+
+/* ficha: THE EDIT + THE INTEL */
+const dlg=$("#dlg");
+function related(h){
+  return H.filter(x=>x.id!==h.id&&(x.matriz===h.matriz||x.catP===h.catP||x.catS.some(c=>h.catS.includes(c)))).slice(0,4);
+}
+function ficha(id){
+  const h=H.find(x=>x.id===id);if(!h)return;
+  const [gl,gc]=GEO[h.geo];
+  const kv=(k,v)=>`<div class="kv"><small>${k}</small>${esc(v)}</div>`;
+  const P={
+   "Contexto":`<h4>Qué pasó</h4><p>${esc(h.what)}</p><h4>Contexto competitivo</h4><p>${esc(h.why)}</p>
+     <h4>Ficha</h4><div class="g2">${kv("Empresa matriz",h.matriz)}${kv("Marca",h.marca)}${kv("País / región",h.pais)}${kv("Alcance",gl)}${kv("Fecha del evento",h.fev)}${kv("Publicación",h.fpub)}${kv("Producto",h.prod)}${kv("Movimiento",h.mov)}${kv("Tipo de contenido",h.tipo)}${kv("ID",h.id)}</div>`,
+   "Estrategia":`<h4>Estrategia identificada</h4><p>${esc(h.estr)}</p><h4>Diferenciación</h4><p>${esc(h.dif)}</p><h4>Ocasión de consumo</h4><p>${esc(h.ocasion)}</p><h4>Público</h4><p>${esc(h.aud)}</p><h4>Tendencias relacionadas</h4><p>${esc(h.tend)}</p><h4>Aprendizaje</h4><p>${esc(h.aprend)}</p>`,
+   "Ecuador":`<div class="ev" style="--e:var(--hyp)"><small>Oportunidad para Ecuador</small><p>${esc(h.opEc)}</p></div><h4>Limitaciones</h4><p>${esc(h.lim)}</p><h4>Plazo</h4><p><span class="pl">${h.plazo}</span></p>`,
+   "Evidencia":`<h4>Resultados y KPI</h4><p>${esc(h.res)}</p>
+     <div class="ev" style="--e:var(--fact)"><small>Hecho</small><p>${esc(h.what.split(". ")[0])}.</p></div>
+     <div class="ev" style="--e:var(--interp)"><small>Interpretación</small><p>${esc(h.interp)}</p></div>
+     <div class="ev" style="--e:var(--hyp)"><small>Hipótesis</small><p>${esc(h.hip)}</p></div>
+     <p class="small" style="margin-top:8px">Nivel de confianza: ${h.conf}</p>
+     <h4>Relevancia · ${h.score}/100 · ${lvl(h.score)}</h4><div class="bars">${CRIT.map((c,i)=>`<div class="br"><span>${c[0]}</span><b>${h.br[i]}/${c[1]}</b><div class="t"><span style="width:${h.br[i]/c[1]*100}%"></span></div></div>`).join("")}</div>
+     <h4>Fuentes</h4><p>${h.src.map(s=>`<a href="${s[1]}" target="_blank" rel="noopener">${s[0]} ↗</a>`).join(" · ")}</p><p class="small">Consultadas el ${EDITION.consult}</p>`,
+   "Relacionadas":`<h4>Conexiones</h4><p>${esc(h.conex)}</p><h4>Historias relacionadas</h4><div class="rel-l" style="margin-top:4px">${related(h).map(x=>`<button data-open="${x.id}">${x.e} ${esc(x.hl)} →</button>`).join("")}</div><h4>Palabras clave</h4><div class="tags">${h.kw.map(k=>`<span class="tg">${esc(k)}</span>`).join("")}</div>`
+  };
+  const keys=Object.keys(P);
+  dlg.innerHTML=`<div class="dx"><button data-close aria-label="Cerrar">×</button></div>
+   <div class="lv1" style="--cc:${CAT[h.catP]}"><div class="art"><span class="sec-l">${SEC[h.sec]}</span><span class="emo" aria-hidden="true">${h.e}</span><span class="cat">${h.catP}</span></div>
+   <div class="bd"><div class="kick" style="margin:0"><i style="--k:var(--lime)"></i>The Edit</div><h3 id="d-t">${esc(h.hl)}</h3><p class="sum">${esc(h.sum)}</p>
+    <div class="meta"><span><b>${esc(h.marca)}</b> · ${esc(h.matriz)}</span><span class="geo" style="--g:${gc}">${esc(shortP(h.pais))}</span><span>${esc(h.fpub)}</span><span class="pl">Relevancia ${h.score} · ${lvl(h.score)}</span></div>
+    <div class="tags">${h.catS.map(t=>`<span class="tg">${t}</span>`).join("")}</div>
+    <div class="srcl"><span>Fuente original: <a href="${h.src[0][1]}" target="_blank" rel="noopener">${esc(h.src[0][0])} ↗</a></span>${imgBtn(h.imgq)}</div></div></div>
+   <div class="lvl">The Intel · entender lo que importa</div>
+   <div class="ftabs" role="tablist">${keys.map((k,i)=>`<button role="tab" data-p="${i}" aria-selected="${i===0}">${k}</button>`).join("")}</div>
+   <div class="fb">${keys.map((k,i)=>`<div data-pane="${i}" ${i?"hidden":""}>${P[k]}</div>`).join("")}</div>`;
+  if(!dlg.open)dlg.showModal();dlg.scrollTop=0;
+}
+document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target.classList&&e.target.classList.contains("story")){e.preventDefault();ficha(e.target.dataset.id)}});
+document.addEventListener("click",e=>{if(e.target.closest("a"))return;const p=e.target.closest(".story,.irow,[data-open]");if(p)ficha(p.dataset.id||p.dataset.open)});
+dlg.addEventListener("click",e=>{
+  if(e.target===dlg||e.target.closest("[data-close]")){dlg.close();return}
+  const b=e.target.closest(".ftabs button");if(!b)return;
+  dlg.querySelectorAll(".ftabs button").forEach(x=>x.setAttribute("aria-selected",x===b));
+  dlg.querySelectorAll("[data-pane]").forEach(p=>p.hidden=p.dataset.pane!==b.dataset.p);
+});
+
+function toast(t){const el=$("#toast");el.textContent=t;el.classList.add("on");setTimeout(()=>el.classList.remove("on"),1800)}
+async function copy(t,m){try{await navigator.clipboard.writeText(t);toast(m)}catch(e){toast("No se pudo copiar")}}
+$("#cp-json").onclick=()=>copy(JSON.stringify({edicion:EDITION,historias:H},null,2),"Datos copiados");
+$("#cp-sum").onclick=()=>copy(`THE SWEET EDIT. · Edición ${EDITION.n} · ${EDITION.date}\nWhere sweet meets strategy.\n\n${NOW.map(n=>n[0].toUpperCase()+": "+n[1].replace(/<[^>]+>/g,"")).join("\n")}\n\nTOP DE LA SEMANA\n${H.slice(0,6).map(h=>`• [${h.score}] ${h.hl}: ${h.sum}`).join("\n")}`,"Resumen copiado");
+
+const last=store.get("tse-tab");show(TABS.some(t=>t[0]===last)?last:"inicio");
+</script>
+</body>
+</html>
